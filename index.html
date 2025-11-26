@@ -3,47 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MV/HHS Hack Price Tracker</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Remy Travel Muse - Save Quick, Save Smart</title>
 
+    <!-- Getting the main Bootstrap styles (Code From Bootstrap) --><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- All my own custom styles are here --><style>
+        /* Importing my custom fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        /* Setting the overall body look (background color, padding for the sticky menu) */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #343a40; 
+            padding-top: 56px; /* Space for the fixed menu bar */
+            color: #f8f9fa; 
+        }
+
+        /* --- Custom look for the top menu --- */
+        .top-menu {
+            background-color: #fff; /* White menu bar */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .navbar-nav .nav-link {
+            color: #555 !important;
+            font-weight: 500;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #222 !important;
+        }
+        .website-logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #387b9b !important;
+            letter-spacing: -0.5px;
+        }
+
+        /* --- Styling the big welcome banner --- */
+        .big-intro-section {
+            height: calc(100vh - 56px); /* Using calc to fill the remaining screen height */
+            background-image: url('backImage.jpg'); 
+            background-size: cover;
+            background-position: center;
+            position: relative; 
+            
+            /* Center the text and the form in the middle of the screen */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Adding a slight shadow/overlay over the picture so the text is easier to read */
+        .background-darkener {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: 1; /* Keeping it behind the content */
+        }
+
+        /* Styling for the big headline text */
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 2; /* Bringing it above the dark overlay */
+        }
+
+        /* Styling for the smaller tagline text */
+        .small-description {
+            font-size: 1.25rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            margin-bottom: 2rem;
+            z-index: 2;
+        }
+
+        /* Making the search bar look good and limiting its width on large screens */
+        .link-input-area {
+            max-width: 600px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+        .link-input-area .form-control {
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+        .link-input-area .btn {
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        /* Making sure the title shrinks on small phones */
+        @media (max-width: 768px) { 
+            .main-title {
+                font-size: 3rem;
+            }
+            .big-intro-section {
+                padding: 0 1rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+
+<!-- MAIN MENU BAR: This is the sticky menu at the top (Code From Bootstrap) --><nav class="navbar navbar-expand-lg top-menu fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand website-logo-name" href="#">Savely</a> <!-- The site name/logo text -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- The links on the left side of the menu (Code From Bootstrap) -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <!-- The links and search icon on the right (Code From Bootstrap) -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
+        <li class="nav-item"><a class="nav-link d-flex align-items-center" href="#">
+            <!-- The little magnifying glass icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search me-1" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+             SEARCH
+        </a></li>
+      </ul>
     </div>
   </div>
 </nav>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<!-- The large picture area with the main title (Code From Bootstrap for structure)-->
+<div class="big-intro-section">
+    <div class="background-darkener"></div>
+    <div class="hero-content container">
+        <h1 class="main-title mb-3">Save Quick, Save Smart</h1>
+        
+        <p class="small-description">
+            Welcome to the only app you need to save quick.
+        </p>
+
+        <form class="d-flex link-input-area w-100">
+            <input class="form-control form-control-lg me-0" type="text" placeholder="Insert your link to start saving...."> <!-- Search input (Code From Bootstrap) -->
+            <button class="btn btn-primary btn-lg" type="submit">Search</button> <!-- Search button (Code From Bootstrap) -->
+        </form>
+    </div>
+</div>
+
+
 </body>
 </html>
