@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Save Quick, Save Smart</title>
+    <title>Remy Travel Muse - Save Quick, Save Smart</title>
 
     <!-- Getting the main Bootstrap styles (Code From Bootstrap) --><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- All my own custom styles are here --><style>
         /* Importing my custom fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-        /* Setting the overall body look (background color, padding for the sticky menu) */
+        /* --- New CSS for Sticky Footer --- */
+        /* Makes the body use flex to push the footer down */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #343a40; 
-            padding-top: 56px; /* Space for the fixed menu bar */
-            color: #f8f9fa; 
+            /* ... existing styles ... */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
         }
 
+        /*Makes words highlightable*/
+        ::selection {
+            background: #007bff; /* Light blue highlight background */
+            color: white;        /* White text when highlighted */
+        }
         /* --- Custom look for the top menu --- */
         .top-menu {
             background-color: #fff; /* White menu bar */
@@ -42,7 +48,7 @@
         /* --- Styling the big welcome banner --- */
         .big-intro-section {
             height: calc(100vh - 56px); /* Using calc to fill the remaining screen height */
-            background-image: url('backImage.jpg'); 
+            background-image: url('../static/happypeople.jpg'); 
             background-size: cover;
             background-position: center;
             position: relative; 
@@ -65,7 +71,7 @@
 
         /* Styling for the big headline text */
         .main-title {
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Amiri', sans-serif;
             font-size: 4rem;
             font-weight: 700;
             color: white;
@@ -111,31 +117,17 @@
 
 <!-- MAIN MENU BAR: This is the sticky menu at the top (Code From Bootstrap) --><nav class="navbar navbar-expand-lg top-menu fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand website-logo-name" href="#">Savely</a> <!-- The site name/logo text -->
+    <a class="navbar-brand website-logo-name fs-1" href="{{url_for('index')}}">MACH</a> <!-- The site name/logo text -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <!-- The links on the left side of the menu (Code From Bootstrap) -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
-      </ul>
+
       <!-- The links and search icon on the right (Code From Bootstrap) -->
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Unfinished</a></li>
-        <li class="nav-item"><a class="nav-link d-flex align-items-center" href="#">
-            <!-- The little magnifying glass icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search me-1" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg>
-             SEARCH
-        </a></li>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center fs-4">
+        <li class="nav-item mr-5"><a class="nav-link" href="{{url_for('about')}}">About Us</a></li>
       </ul>
     </div>
   </div>
@@ -144,21 +136,28 @@
 <!-- The large picture area with the main title (Code From Bootstrap for structure)-->
 <div class="big-intro-section">
     <div class="background-darkener"></div>
-    <div class="hero-content container">
-        <h1 class="main-title mb-3">Save Quick, Save Smart</h1>
+    <div class="text-white hero-content container">
+        <h1 class="display-1 fs-1 mb-3">Save Quick, Save Smart</h1>
         
-        <p class="small-description">
+        <p class="display-5 fs-6 mt-3 mb-4">
             Welcome to the only app you need to save quick.
         </p>
+        
+{%if link and email%}
+    <h1>Thanks for filling out the form!</h1>
+    <h2>You put Link: {{link}} and Email: {{email}} as your responses.</h2>
+    <p>A confirmation email has been sent out, a follow-up email will be sent when your item price changes.</p> 
 
-        <form class="d-flex link-input-area w-100">
-            <input class="form-control form-control-lg me-0" type="text" placeholder="Insert your link to start saving...."> <!-- Search input (Code From Bootstrap) -->
-            <button class="btn btn-primary btn-lg" type="submit">Search</button> <!-- Search button (Code From Bootstrap) -->
-        </form>
+{% else %}
+    <form class="d-flex link-input-area w-100" method="POST">
+        {{form.hidden_tag()}}
+        {{form.link.label}} {{form.link(class="form-control form-control-lg me-0")}}
+        {{form.email.label}} {{form.email(class="form-control form-control-lg me-0")}}
+        {{form.submit(class="btn btn-primary btn-lg")}}
+{% endif %}
+    </form>
+
     </div>
 </div>
-
-
 </body>
-
 </html>
